@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Демид Орлов — Аудитория, которая платит</title>
+<meta name="description" content="Наставничество для экспертов и блогеров: система привлечения аудитории и монетизации без выгорания.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg: #15110d;
+    --bg-elevated: #1c1610;
+    --bg-elevated-2: #211a13;
+    --hairline: #33291a;
+    --hairline-soft: #241d15;
+    --text-primary: #f3ece0;
+    --text-secondary: #a89a83;
+    --text-tertiary: #766a58;
+    --gold: #c9a227;
+    --gold-bright: #e6c258;
+    --gold-dim: #8a6d1d;
+    --serif: 'Cormorant Garamond', Georgia, serif;
+    --sans: 'Jost', 'Helvetica Neue', Arial, sans-serif;
+    --max-w: 1180px;
+    --edge: clamp(1.5rem, 5vw, 4.5rem);
+  }
+
+  *{ box-sizing: border-box; }
+  html{ scroll-behavior: smooth; }
+  @media (prefers-reduced-motion: reduce){
+    html{ scroll-behavior: auto; }
+    *{ animation-duration: 0.001ms !important; animation-iteration-count: 1 !important; transition-duration: 0.001ms !important; }
+  }
+
+  body{
+    margin:0;
+    background: var(--bg);
+    background-image:
+      radial-gradient(ellipse 70% 55% at 82% -8%, rgba(201,162,39,0.10), transparent 60%),
+      radial-gradient(ellipse 60% 40% at 8% 8%, rgba(201,162,39,0.05), transparent 55%);
+    color: var(--text-primary);
+    font-family: var(--sans);
+    font-weight: 300;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  img{ max-width:100%; display:block; }
+  a{ color: inherit; }
+
+  ::selection{ background: var(--gold); color: #17130d; }
+
+  a:focus-visible,
+  button:focus-visible,
+  input:focus-visible,
+  textarea:focus-visible{
+    outline: 2px solid var(--gold-bright);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+
+  .wrap{
+    max-width: var(--max-w);
+    margin: 0 auto;
+    padding-left: var(--edge);
+    padding-right: var(--edge);
+  }
+
+  .eyebrow{
+    font-family: var(--sans);
+    text-transform: uppercase;
+    letter-spacing: 0.22em;
+    font-size: 0.72rem;
+    color: var(--gold);
+    font-weight: 500;
+  }
+
+  h1,h2,h3{
+    font-family: var(--serif);
+    font-weight: 600;
+    margin: 0;
+    letter-spacing: 0;
+  }
+
+  p{ margin: 0; }
+
+  .btn{
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6em;
+    font-family: var(--sans);
+    font-size: 0.76rem;
+    font-weight: 500;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    text-decoration: none;
+    padding: 1em 2.1em;
+    border-radius: 1px;
+    transition: all 220ms ease;
+    cursor: pointer;
+    border: 1px solid transparent;
+    white-space: nowrap;
+  }
+  .btn-primary{
+    background: transparent;
+    border-color: var(--gold-dim);
+    color: var(--gold-bright);
+  }
+  .btn-primary:hover{
+    border-color: var(--gold-bright);
+    background: rgba(201,162,39,0.08);
+    color: var(--text-primary);
+  }
+  .btn-ghost{
+    background: transparent;
+    border-color: transparent;
+    color: var(--text-secondary);
+    padding-left: 0.2em;
+    padding-right: 0.2em;
+    position: relative;
+  }
+  .btn-ghost::after{
+    content: '';
+    position: absolute; left: 0.2em; right: 0.2em; bottom: 0.6em;
+    height: 1px; background: var(--hairline);
+    transition: background 200ms ease;
+  }
+  .btn-ghost:hover{ color: var(--text-primary); }
+  .btn-ghost:hover::after{ background: var(--gold-dim); }
+
+  /* ---------- Header ---------- */
+  header{
+    position: sticky; top:0; z-index: 40;
+    background: rgba(21,17,13,0.82);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--hairline-soft);
+  }
+  .nav{
+    display:flex; align-items:center; justify-content:space-between;
+    padding: 1.1rem var(--edge);
+    max-width: var(--max-w); margin: 0 auto;
+  }
+  .brand{
+    font-family: var(--serif);
+    font-size: 1.15rem;
+    letter-spacing: 0.02em;
+    text-decoration: none;
+    color: var(--text-primary);
+  }
+  .brand em{ color: var(--gold); font-style: normal; }
+  .nav-links{
+    display:flex; gap: 2.2rem; list-style:none; margin:0; padding:0;
+    font-size: 0.88rem; letter-spacing: 0.02em; color: var(--text-secondary);
+  }
+  .nav-links a{ text-decoration:none; transition: color 180ms ease; }
+  .nav-links a:hover{ color: var(--gold-bright); }
+  .nav-cta{ display:flex; align-items:center; gap:1.5rem; }
+  @media (max-width: 780px){ .nav-links{ display:none; } }
+
+  /* ---------- Hero ---------- */
+  .hero{
+    padding: clamp(3.5rem, 9vw, 7.5rem) var(--edge) clamp(3rem, 7vw, 5rem);
+    max-width: var(--max-w); margin: 0 auto;
+    display:grid; grid-template-columns: 1.15fr 0.85fr; gap: clamp(2.5rem, 6vw, 5rem);
+    align-items: end;
+  }
+  .hero-head h1{
+    font-size: clamp(2.4rem, 5.2vw, 4.1rem);
+    line-height: 1.08;
+    margin-top: 1rem;
+    color: var(--text-primary);
+  }
+  .hero-head h1 i{ font-style: italic; color: var(--gold-bright); font-weight: 600; }
+  .hero-sub{
+    margin-top: 1.6rem;
+    max-width: 42ch;
+    color: var(--text-secondary);
+    font-size: 1.05rem;
+    line-height: 1.7;
+  }
+  .hero-ctas{ display:flex; gap:1rem; margin-top: 2.4rem; flex-wrap: wrap; }
+
+  /* Ledger plaque — signature element */
+  .ledger{
+    border: 1px solid var(--hairline);
+    background: linear-gradient(175deg, var(--bg-elevated), var(--bg-elevated-2));
+    padding: 1.9rem 1.9rem 1.6rem;
+    position: relative;
+  }
+  .ledger::before{
+    content:'';
+    position: absolute; inset: 6px;
+    border: 1px solid rgba(201,162,39,0.18);
+    pointer-events: none;
+  }
+  .ledger-title{
+    font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.2em;
+    color: var(--text-tertiary); margin-bottom: 1.3rem;
+  }
+  .ledger-row{
+    display:flex; justify-content: space-between; align-items: baseline; gap: 1.2rem;
+    padding: 0.85rem 0; border-top: 1px solid var(--hairline-soft);
+  }
+  .ledger-row:first-of-type{ border-top: none; }
+  .ledger-label{ font-size: 0.85rem; color: var(--text-secondary); flex: 1 1 auto; min-width: 0; }
+  .ledger-value{
+    font-family: var(--serif); font-weight: 600; font-size: 1.5rem; color: var(--gold-bright);
+    font-variant-numeric: tabular-nums; flex: 0 0 auto; white-space: nowrap;
+  }
+  .ledger-value small{ font-family: var(--sans); font-size: 0.62em; color: var(--text-tertiary); margin-left: 0.3em; }
+  .ledger-foot{
+    margin-top: 1.4rem; padding-top: 1.1rem; border-top: 1px solid var(--hairline-soft);
+    font-size: 0.74rem; color: var(--text-tertiary); display:flex; justify-content: space-between;
+  }
+  .pulse-dot{ width:6px; height:6px; border-radius:50%; background: var(--gold-bright); display:inline-block; margin-right:0.5em;
+    animation: pulse 1.8s ease-in-out infinite; }
+  @keyframes pulse{ 0%,100%{ opacity: .35 } 50%{ opacity: 1 } }
+
+  @media (max-width: 900px){
+    .hero{ grid-template-columns: 1fr; align-items: start; }
+  }
+
+  /* ---------- Credibility strip ---------- */
+  .strip{
+    border-top: 1px solid var(--hairline-soft);
+    border-bottom: 1px solid var(--hairline-soft);
+    padding: 2.4rem var(--edge);
+  }
+  .strip-inner{
+    max-width: var(--max-w); margin:0 auto;
+    display:grid; grid-template-columns: repeat(4,1fr); gap: 2rem;
+  }
+  .strip-item{ text-align: center; }
+  .strip-num{ font-family: var(--serif); font-weight: 600; font-size: clamp(1.5rem,3vw,2.1rem); color: var(--text-primary); }
+  .strip-num span{ color: var(--gold); }
+  .strip-label{ font-size: 0.76rem; color: var(--text-tertiary); margin-top: 0.4rem; letter-spacing: 0.03em; }
+  @media (max-width: 700px){ .strip-inner{ grid-template-columns: repeat(2,1fr); } }
+
+  /* ---------- Section shell ---------- */
+  section{ padding: clamp(4rem, 9vw, 7rem) var(--edge); }
+  .section-inner{ max-width: var(--max-w); margin: 0 auto; }
+  .section-head{ max-width: 640px; margin-bottom: clamp(2.5rem, 5vw, 4rem); }
+  .section-head h2{
+    font-size: clamp(1.9rem, 3.6vw, 2.7rem);
+    margin-top: 0.9rem; color: var(--text-primary); line-height: 1.15;
+  }
+  .section-head p{ margin-top: 1.1rem; color: var(--text-secondary); font-size: 1rem; line-height: 1.75; }
+
+  /* ---------- Method (genuine 3-step sequence) ---------- */
+  .method-list{ display:flex; flex-direction: column; }
+  .method-item{
+    display:grid; grid-template-columns: 90px 1fr; gap: 2rem;
+    padding: 2.4rem 0; border-top: 1px solid var(--hairline-soft);
+  }
+  .method-item:last-child{ border-bottom: 1px solid var(--hairline-soft); }
+  .method-num{ font-family: var(--serif); font-size: 2.3rem; color: var(--gold-dim); font-style: italic; font-weight: 600; }
+  .method-body h3{ font-size: 1.4rem; color: var(--text-primary); font-weight: 500; }
+  .method-body p{ margin-top: 0.7rem; color: var(--text-secondary); max-width: 62ch; line-height: 1.75; }
+  @media (max-width: 620px){ .method-item{ grid-template-columns: 1fr; gap: 0.6rem; } }
+
+  /* ---------- Testimonials ---------- */
+  .testi-grid{ display:grid; grid-template-columns: repeat(3,1fr); gap: 1.5rem; }
+  .testi-card{
+    border: 1px solid var(--hairline); padding: 2rem 1.8rem;
+    background: linear-gradient(175deg, var(--bg-elevated), transparent);
+  }
+  .testi-quote{ font-family: var(--serif); font-style: italic; font-weight: 500; font-size: 1.25rem; line-height: 1.55; color: var(--text-primary); }
+  .testi-meta{ margin-top: 1.4rem; display:flex; justify-content: space-between; align-items:center; }
+  .testi-name{ font-size: 0.88rem; color: var(--text-primary); }
+  .testi-role{ font-size: 0.76rem; color: var(--text-tertiary); }
+  .testi-result{ font-family: var(--serif); color: var(--gold-bright); font-size: 1rem; }
+  @media (max-width: 900px){ .testi-grid{ grid-template-columns: 1fr; } }
+
+  /* ---------- Offer ---------- */
+  .offer{
+    border: 1px solid var(--hairline);
+    padding: clamp(2.2rem, 5vw, 3.5rem);
+    background: linear-gradient(160deg, var(--bg-elevated), var(--bg-elevated-2));
+    display:grid; grid-template-columns: 1.1fr 0.9fr; gap: 3rem;
+  }
+  .offer-list{ list-style:none; margin: 1.6rem 0 0; padding: 0; display:flex; flex-direction:column; gap: 0.9rem; }
+  .offer-list li{ display:flex; gap: 0.8rem; color: var(--text-secondary); font-size: 0.95rem; line-height: 1.6; }
+  .offer-list li::before{ content:'—'; color: var(--gold); flex-shrink:0; }
+  .offer-side{ border-left: 1px solid var(--hairline); padding-left: 2.4rem; }
+  .offer-price-label{ font-size: 0.74rem; text-transform: uppercase; letter-spacing: 0.18em; color: var(--text-tertiary); }
+  .offer-price{ font-family: var(--serif); font-weight: 600; font-size: 2.2rem; color: var(--gold-bright); margin-top: 0.6rem; }
+  .offer-note{ font-size: 0.84rem; color: var(--text-tertiary); margin-top: 0.8rem; line-height: 1.6; }
+  .offer-side .btn{ margin-top: 1.8rem; width: 100%; justify-content: center; }
+  @media (max-width: 900px){ .offer{ grid-template-columns: 1fr; } .offer-side{ border-left:none; border-top: 1px solid var(--hairline); padding-left:0; padding-top: 2rem; } }
+
+  /* ---------- FAQ ---------- */
+  .faq-item{ border-top: 1px solid var(--hairline-soft); }
+  .faq-item:last-child{ border-bottom: 1px solid var(--hairline-soft); }
+  .faq-q{
+    width:100%; text-align:left; background:none; border:none; color: var(--text-primary);
+    font-family: var(--sans); font-size: 1.02rem; padding: 1.5rem 0; cursor:pointer;
+    display:flex; justify-content:space-between; align-items:center; gap:1rem;
+  }
+  .faq-q .plus{ color: var(--gold); font-size: 1.2rem; transition: transform 200ms ease; flex-shrink:0; }
+  .faq-item[open] .plus{ transform: rotate(45deg); }
+  .faq-a{ padding: 0 0 1.6rem; color: var(--text-secondary); line-height: 1.75; max-width: 65ch; }
+
+  /* ---------- Final CTA ---------- */
+  .final{
+    text-align:center; border-top: 1px solid var(--hairline-soft);
+    padding: clamp(4.5rem, 10vw, 7.5rem) var(--edge);
+  }
+  .final h2{ font-size: clamp(2rem, 5vw, 3.2rem); max-width: 18ch; margin: 0.9rem auto 0; }
+  .final p{ color: var(--text-secondary); margin-top: 1.2rem; }
+  .final .btn{ margin-top: 2.2rem; }
+
+  footer{
+    border-top: 1px solid var(--hairline-soft);
+    padding: 2.5rem var(--edge);
+    display:flex; justify-content:space-between; align-items:center; flex-wrap: wrap; gap: 1rem;
+    font-size: 0.8rem; color: var(--text-tertiary);
+    max-width: var(--max-w); margin: 0 auto;
+  }
+  footer a{ text-decoration:none; color: var(--text-tertiary); }
+  footer a:hover{ color: var(--gold-bright); }
+  .foot-links{ display:flex; gap: 1.5rem; }
+</style>
+</head>
+<body>
+
+<header>
+  <nav class="nav">
+    <a href="#top" class="brand">Демид <em>Орлов</em></a>
+    <ul class="nav-links">
+      <li><a href="#method">Метод</a></li>
+      <li><a href="#proof">Результаты</a></li>
+      <li><a href="#offer">Наставничество</a></li>
+      <li><a href="#faq">Вопросы</a></li>
+    </ul>
+    <div class="nav-cta">
+      <a href="#offer" class="btn btn-primary">Заявка</a>
+    </div>
+  </nav>
+</header>
+
+<main id="top">
+
+  <section class="hero" style="padding-top: clamp(3.5rem, 9vw, 6rem);">
+    <div class="hero-head">
+      <span class="eyebrow">Стратегия роста и монетизации аудитории</span>
+      <h1>Аудитория — это актив.<br><i>Я учу его монетизировать.</i></h1>
+      <p class="hero-sub">За 8 лет я довёл 340+ экспертов и блогеров от «просто веду блог» до системного дохода с аудитории — без выгорания, скидок и ощущения, что вы продаёте себя.</p>
+      <div class="hero-ctas">
+        <a href="#offer" class="btn btn-primary">Забронировать разбор</a>
+        <a href="#proof" class="btn btn-ghost">Смотреть результаты</a>
+      </div>
+    </div>
+
+    <div class="ledger" role="group" aria-label="Совокупные показатели учеников">
+      <div class="ledger-title">Совокупно у учеников · обновляется еженедельно</div>
+      <div class="ledger-row">
+        <span class="ledger-label">Суммарная аудитория</span>
+        <span class="ledger-value" data-count="2140000" data-suffix="">0<small>чел.</small></span>
+      </div>
+      <div class="ledger-row">
+        <span class="ledger-label">Заработано учениками</span>
+        <span class="ledger-value" data-count="640" data-prefix="₽" data-suffix="M">₽0M</span>
+      </div>
+      <div class="ledger-row">
+        <span class="ledger-label">Средняя конверсия в оплату</span>
+        <span class="ledger-value" data-count="11" data-suffix="%">0%</span>
+      </div>
+      <div class="ledger-foot">
+        <span><span class="pulse-dot" aria-hidden="true"></span>Данные учеников за последние 12&nbsp;мес</span>
+        <span>340+ кейсов</span>
+      </div>
+    </div>
+  </section>
+
+  <div class="strip">
+    <div class="strip-inner">
+      <div class="strip-item">
+        <div class="strip-num"><span>8</span> лет</div>
+        <div class="strip-label">в стратегиях роста аудитории</div>
+      </div>
+      <div class="strip-item">
+        <div class="strip-num"><span>340+</span></div>
+        <div class="strip-label">экспертов и блогеров прошли наставничество</div>
+      </div>
+      <div class="strip-item">
+        <div class="strip-num"><span>₽640M</span></div>
+        <div class="strip-label">заработано учениками на своей аудитории</div>
+      </div>
+      <div class="strip-item">
+        <div class="strip-num"><span>4.9</span> / 5</div>
+        <div class="strip-label">средняя оценка наставничества</div>
+      </div>
+    </div>
+  </div>
+
+  <section id="method">
+    <div class="section-inner">
+      <div class="section-head">
+        <span class="eyebrow">Метод</span>
+        <h2>Три стадии, через которые проходит любая платящая аудитория</h2>
+        <p>Это не воронка из курса. Это порядок, в котором незнакомый человек в ленте становится тем, кто платит вам — я наблюдаю его в каждом кейсе, независимо от ниши.</p>
+      </div>
+      <div class="method-list">
+        <div class="method-item">
+          <div class="method-num">01</div>
+          <div class="method-body">
+            <h3>Внимание</h3>
+            <p>Как удерживать взгляд в ленте, где всё борется за 2 секунды: формат, ритм публикаций, крючки первых кадров. Не «больше контента», а контент, который узнают.</p>
+          </div>
+        </div>
+        <div class="method-item">
+          <div class="method-num">02</div>
+          <div class="method-body">
+            <h3>Доверие</h3>
+            <p>Как превратить зрителя в подписчика, который верит вашим словам раньше, чем вы что-то продали. Здесь решается, купят у вас один раз или будут покупать годами.</p>
+          </div>
+        </div>
+        <div class="method-item">
+          <div class="method-num">03</div>
+          <div class="method-body">
+            <h3>Доход</h3>
+            <p>Как собрать оффер и воронку так, чтобы продажа ощущалась как естественное продолжение контента, а не как рекламная пауза. Без скидок и дожимных сторис.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="proof" style="background: var(--bg-elevated); border-top:1px solid var(--hairline-soft); border-bottom:1px solid var(--hairline-soft);">
+    <div class="section-inner">
+      <div class="section-head">
+        <span class="eyebrow">Результаты учеников</span>
+        <h2>Три истории — три разных ниши, одна и та же система</h2>
+      </div>
+      <div class="testi-grid">
+        <div class="testi-card">
+          <p class="testi-quote">«Я 3 года вела блог "для души" и стеснялась продавать. За 4 месяца в наставничестве сделала первый оффер на 1,2М — и продала его без единой скидки».</p>
+          <div class="testi-meta">
+            <div>
+              <div class="testi-name">Алина Р.</div>
+              <div class="testi-role">эксперт по питанию, 96К подписчиков</div>
+            </div>
+            <div class="testi-result">×4.1</div>
+          </div>
+        </div>
+        <div class="testi-card">
+          <p class="testi-quote">«Проблема была не в охватах — охваты были огромные. Проблема была в доверии. Демид переставил местами 2 блока в воронке, и конверсия выросла втрое».</p>
+          <div class="testi-meta">
+            <div>
+              <div class="testi-name">Марк Т.</div>
+              <div class="testi-role">финансовый блогер, 210К подписчиков</div>
+            </div>
+            <div class="testi-result">×3.0</div>
+          </div>
+        </div>
+        <div class="testi-card">
+          <p class="testi-quote">«Начинала с нуля. Через 7 месяцев — 41 тысяча подписчиков и первый месяц с доходом выше моей прошлой зарплаты в найме».</p>
+          <div class="testi-meta">
+            <div>
+              <div class="testi-name">Севиль К.</div>
+              <div class="testi-role">визуальный блог, с нуля</div>
+            </div>
+            <div class="testi-result">41K</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="offer">
+    <div class="section-inner">
+      <div class="section-head">
+        <span class="eyebrow">Наставничество</span>
+        <h2>«Аудитория → Доход»</h2>
+        <p>Личная работа со мной над вашим блогом и вашим оффером в течение 12 недель. Беру не всех — на старте разбираю ваш блог и говорю честно, вижу ли потенциал.</p>
+      </div>
+      <div class="offer">
+        <div class="offer-main">
+          <h3 style="font-size:1.3rem; color: var(--text-primary); font-weight:500;">Что входит</h3>
+          <ul class="offer-list">
+            <li>Аудит блога и разбор точки роста в первую неделю</li>
+            <li>Личная стратегия контента под вашу нишу и формат</li>
+            <li>Сборка или пересборка оффера и воронки продаж</li>
+            <li>12 недель еженедельных созвонов 1:1</li>
+            <li>Доступ к чату для быстрых вопросов между созвонами</li>
+            <li>Разбор рекламных и органических запусков вживую</li>
+          </ul>
+        </div>
+        <div class="offer-side">
+          <div class="offer-price-label">Формат</div>
+          <div class="offer-price">По заявке</div>
+          <p class="offer-note">Беру 6 человек в поток. Стоимость зависит от текущего размера аудитории и формата работы — обсуждаем на разборе.</p>
+          <a href="#top" class="btn btn-primary">Оставить заявку на разбор</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="faq">
+    <div class="section-inner">
+      <div class="section-head">
+        <span class="eyebrow">Вопросы</span>
+        <h2>Прежде чем оставить заявку</h2>
+      </div>
+      <div class="faq-list">
+        <details class="faq-item" open>
+          <summary class="faq-q">У меня маленькая аудитория — есть ли смысл?<span class="plus" aria-hidden="true">+</span></summary>
+          <div class="faq-a">Да, если аудитория растёт и вы понимаете, кому и зачем вы пишете. Метод работает от 3–5 тысяч вовлечённых подписчиков — дальше это вопрос скорости, а не наличия шанса.</div>
+        </details>
+        <details class="faq-item">
+          <summary class="faq-q">Чем это отличается от курса по SMM?<span class="plus" aria-hidden="true">+</span></summary>
+          <div class="faq-a">Курс даёт общие принципы для всех. Здесь я лично смотрю на ваш блог, вашу нишу и вашу аудиторию и подстраиваю стратегию под конкретные цифры, а не под усреднённый кейс.</div>
+        </details>
+        <details class="faq-item">
+          <summary class="faq-q">Сколько времени нужно уделять в неделю?<span class="plus" aria-hidden="true">+</span></summary>
+          <div class="faq-a">В среднем 4–6 часов, включая созвон. Наставничество встраивается в текущую работу над блогом, а не добавляется поверх неё отдельным проектом.</div>
+        </details>
+        <details class="faq-item">
+          <summary class="faq-q">Что если меня не возьмут в поток?<span class="plus" aria-hidden="true">+</span></summary>
+          <div class="faq-a">На разборе я честно скажу, вижу ли потенциал именно сейчас, и что стоит сделать до следующего набора. Разбор бесплатный в любом случае.</div>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <section class="final">
+    <span class="eyebrow">Следующий поток — ограничено</span>
+    <h2>Разберём ваш блог и решим, есть ли смысл работать вместе</h2>
+    <p>30 минут, без скриптов продаж. Если не увижу потенциала — скажу прямо.</p>
+    <a href="#top" class="btn btn-primary">Забронировать разбор</a>
+  </section>
+
+</main>
+
+<footer>
+  <span>© 2026 Демид Орлов. Наставничество по росту и монетизации аудитории.</span>
+  <div class="foot-links">
+    <a href="#top">Telegram</a>
+    <a href="#top">Instagram</a>
+    <a href="#top">Написать</a>
+  </div>
+</footer>
+
+<script>
+  // Count-up animation for the ledger plaque — respects reduced-motion.
+  const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  function formatValue(n, prefix, suffix){
+    let display;
+    if (suffix === '') {
+      display = Math.round(n).toLocaleString('ru-RU');
+    } else {
+      display = Math.round(n).toString();
+    }
+    return (prefix || '') + display + (suffix || '');
+  }
+
+  function animateValue(el){
+    const target = parseFloat(el.dataset.count);
+    const prefix = el.dataset.prefix || '';
+    const suffix = el.dataset.suffix || '';
+    const small = el.querySelector('small');
+    const smallHtml = small ? small.outerHTML : '';
+
+    if (prefersReduced) {
+      el.innerHTML = formatValue(target, prefix, suffix) + smallHtml;
+      return;
+    }
+
+    const duration = 1400;
+    const start = performance.now();
+
+    function tick(now){
+      const progress = Math.min((now - start) / duration, 1);
+      const eased = 1 - Math.pow(1 - progress, 3);
+      const current = target * eased;
+      el.innerHTML = formatValue(current, prefix, suffix) + smallHtml;
+      if (progress < 1) requestAnimationFrame(tick);
+    }
+    requestAnimationFrame(tick);
+  }
+
+  const ledgerEl = document.querySelector('.ledger');
+  if (ledgerEl) {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          ledgerEl.querySelectorAll('.ledger-value[data-count]').forEach(animateValue);
+          observer.disconnect();
+        }
+      });
+    }, { threshold: 0.4 });
+    observer.observe(ledgerEl);
+  }
+</script>
+
+</body>
+</html>
